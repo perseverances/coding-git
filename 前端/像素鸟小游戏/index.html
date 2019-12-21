@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">	<!-- 语言是英语 -->
 
-<head>
-	<meta charset="UTF-8">		<!-- meta标签：描述文档的元数据   charset属性规定字符编码-->
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>像素鸟</title>
-	<link rel="stylesheet" href="index.css">
+<head>					<!-- meta标签：描述文档的元数据，模拟http协议的响应头报文 -->
+	<meta charset="UTF-8">		<!-- charset属性规定字符编码-->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">	<!-- 用于移动端显示网页 -->
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">	<!-- name是描述网页的，对应于content（网页内容），以便于搜索引擎机器人查找、分类（目前几乎所有搜索引擎都使用网上机器人自动查找meta值来给网页分类） -->
+	<title>像素鸟</title>									<!-- 用于告知浏览器以何种版本渲染当前页面 -->
+	<link rel="stylesheet" href="index.css">	<!-- 调用一个外部样式的css样式文件，是通过link标签调用的。rel告诉你调用的是一种样式，href是路径 -->
 </head>
 
 <body>
-	<!-- 这是游戏的容器 -->
+	<!-- 这是游戏的容器 -->			<!-- 使用布局标签作为容器来放置一些内容 -->
 	<div id="game">
 		<!-- 天空容器 -->
 		<div class="sky"></div>

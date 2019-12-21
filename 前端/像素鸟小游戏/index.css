@@ -1,25 +1,25 @@
 #game{
 	width:800px;
 	height:600px;
-	border:2px solid;
-	margin:0 auto;
-	position:relative;
-	overflow:hidden;
+	border:2px solid;	/*画一个边框，边线宽为2个像素，实线*/
+	margin:0 auto;		/*设置对象外边框，横居中、竖不居中；上下为0、左右为auto*/
+	position:relative;	/*position把元素放置到一个 相对 的位置中*/
+	overflow:hidden;	/*溢出隐藏，*/
 }
 
 #game .sky{
 	width:1600px;
 	height:600px;
-	background:url('./img/sky.png');
-	position:absolute;
-	left:0;
+	background:url('img/sky.png');	/*  ./img与img没有区别   */
+	position:absolute;				/* 绝对定位 */
+	left:0;							/*距离浏览器左为0，上为0*/
 	top:0;
 }
 
 #game .land{
 	width:1600px;
 	height:112px;
-	background:url('.img/land.png');
+	background:url('./img/land.png');
 	position:absolute;
 	left:0;
 	bottom:0;
@@ -32,8 +32,8 @@
 	position:absolute;
 	left:200px;
 	top:150px;
-	z-index:1;
-	background-position:-8px -10px;
+	z-index:1;		/*设置元素的层叠顺序*/
+	background-position:-8px -10px;		/*  */
 }
 
 #game .pipeup{
