@@ -1,6 +1,8 @@
 let skyBg,landBg,bird,game,pipes;
 
-//关于计数器的函数
+//封装一个关于计数器的函数，返回一个对象，对象包括两个属性
+//start：创建一个计时器；   stop：停止计时器；   duration：计时器每隔多少毫秒执行；
+//callback：每隔duration毫秒执行callback函数；   thisObj：为了得到正确德this指向
 let getTimer = function (duration,thisobj,callback){
 	var timer = null;
 	return{
