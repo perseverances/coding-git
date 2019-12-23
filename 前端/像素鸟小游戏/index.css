@@ -54,6 +54,6 @@
 	right:0;
 }
 
-.msg{
-	text-align:center;
-}
+.msg{							/*text-align属性规定HTML元素中的文本的水平对齐方式*/
+	text-align:center;			/*代表把HTML元素中的文本排列到中间的意思*/
+}							

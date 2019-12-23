@@ -3,14 +3,15 @@ let skyBg,landBg,bird,game,pipes;
 //封装一个关于计数器的函数，返回一个对象，对象包括两个属性
 //start：创建一个计时器；   stop：停止计时器；   duration：计时器每隔多少毫秒执行；
 //callback：每隔duration毫秒执行callback函数；   thisObj：为了得到正确德this指向
-let getTimer = function (duration,thisobj,callback){
+
+let getTimer = function (duration,thisobj,callback){	//let用来声明局部变量，只在let命令所在的代码内有效，而且有暂时性死区的约束
 	var timer = null;
 	return{
 		start:function(){
 			if(!timer){
 				timer = setInterval(function(){
-					callback.bind(thisObj)();
-					},duration),
+					callback.bind(thisObj)();		//定时器：timer = setInterval(function(){要执行的操作}，30)
+					},duration);			//[错误] ;写成了,
 			}
 		},
 		stop:function(){
@@ -26,7 +27,7 @@ let getTimer = function (duration,thisobj,callback){
 game = {
 	paused:true,  //当前游戏是否暂停
 	isGameOver:false,  //当前游戏是否结束
-	dom:document.querySelector('#game'),
+	dom:document.querySelector('#game'),		//获取文档中"game"元素
 	start:function(){
 		skyBg.timer.start();
 		landing.timer.start();
@@ -48,7 +49,7 @@ game = {
 	gameOver:function(){
 		//1.小鸟落地
 		if(bird.top === 462){
-			console.log('游戏结束')
+			console.log('游戏结束');		//[错误] 没写;
 			
 			this.isGameOver = true;
 			this,stop();
@@ -64,7 +65,7 @@ game = {
 			let px = p.left + (p.width/2);
 			let py = p.top + (p.height/2);
 			//判断是否碰撞
-			if(Math.abs(bs - px) < (p.width + bird.width) /2 &&
+			if(Math.abs(bx - px) < (p.width + bird.width) /2 &&		//[错误]bx写成了bs
 				Math.abs(by-py) < (p.heiht + bird.height) /2){
 					console.log("游戏结束");
 					this.isGameOver = true;
@@ -75,8 +76,8 @@ game = {
 }
 
 //天空对象
-slyBg = {
-	left:0;
+skyBg = {			//[错误]skyBg写成了slyBg
+	left:0,			//[错误] ,写成了;
 	dom:document.querySelector('#game .sky');
 	//该方法用于重新更新天空的left值
 	show:function(){
@@ -99,7 +100,7 @@ landBg = {
 		this.dom.style.left = this.left + 'px'
 	}
 }
-landing.timer = getTimer(30,langBg,funtion(){
+landBg.timer = getTimer(30,langBg,funtion(){		//[错误]langBg写成了landing
 	this.left -=2
 	if(this.left === -800){
 		this.left = 0;
@@ -129,7 +130,7 @@ bird = {
 		}
 		//设置小鸟的top值
 		this.dom.style.top = this.top + 'px';
-	},
+	}			//[错误]不应该写,
 	//设置小鸟的top值
 	setTop(newTop){
 		if(newTop < 0){
@@ -156,7 +157,7 @@ bird.dropTimer = getTimer(16,bird,function(){
 	//小鸟做的事匀加速运动
 	//s = vt + 1/2 * a * t * t
 	//如何获取匀加速的末速度：v = v0 + at
-	let s this.speed * 16 + 0.5 * this.a * 16 * 16;
+	let s = this.speed * 16 + 0.5 * this.a * 16 * 16;//[错误]表达式没有写=
 	this.speed = this.speed + this.a * 16;
 	this.setTop(this.top + s);
 	this.show();
@@ -175,25 +176,26 @@ pipes = {
 		gap = 150;				//中间的间隙
 		maxHeight = 488 - gap - minHeight;
 		
+		//接下来确定一组柱子的高度
 		let h1 = this.getRandom(minHeight,maxHeight),
-		h1 = 488 - gap - h1;
+			h1 = 488 - gap - h1;
 		//接下来根据这两个高度来创建柱子
 		//上面的柱子
 		let div1 = document.createElemet("div");
-		div1.classNmae = "pipeip";
+		div1.className = "pipeip";		//[错误]name写成了nmae
 		div1.style.height = h1 + "px";
 		div1.style.left = "800px";
-		game.som.appendChild(div1);
+		game.dom.appendChild(div1);		//[错误]dom写成了som
 		this.all.push({
-			dom:div1;
-			height:h1;
-			width:this.width;
-			top:0;
+			dom:div1,
+			height:h1,
+			width:this.width,		//[错误] 四个,写成了;
+			top:0,
 			left:800
 		});
 		//下面的柱子
 		let div2 = document.createElement("div");
-		div2.classNmae = "pipedown";
+		div2.className = "pipedown";			//[错误]name写成了nmae
 		div2.style.height = h2 + "px";
 		div2.style.left = "800px";
 		game.dom.appendChild(div2);
@@ -213,7 +215,7 @@ pipes.produceTimer = getTimer(2500,pipes,function(){
 })
 
 //移动柱子
-Pipes.moveTimer = getTimer(30,pipes,function(){
+pipes.moveTimer = getTimer(30,pipes,function(){		//[错误]首字母不应该大写
 	//因为要移动所有的柱子  &&  对游戏进行积分
 	for(let i=0;i<this.all.length;i++){
 		let p = this.all[i];	//得到当前的柱子
@@ -227,7 +229,7 @@ Pipes.moveTimer = getTimer(30,pipes,function(){
 		}
 		
 		//判断柱子是否过了小鸟，若过了则说明小鸟过了一根柱子
-		if(p.left< (bird.left-pipes.width)){
+		if(p.left<= (bird.left-pipes.width)){		//[错误] <= 写成了<
 			comsole("+1");
 		}
 	}
