@@ -100,7 +100,7 @@ landBg = {
 		this.dom.style.left = this.left + 'px'
 	}
 }
-landBg.timer = getTimer(30,langBg,funtion(){		//[错误]langBg写成了landing
+landBg.timer = getTimer(30,landBg,function(){//[错误]langBg写成了landing   function
 	this.left -=2
 	if(this.left === -800){
 		this.left = 0;
@@ -116,7 +116,7 @@ bird = {
 	left:200,
 	dom:document.querySelector('#game .bird'),
 	wingIndex:0,	//该属性用于记录当前小鸟的背景图片
-	speed:0;		//小鸟往下面掉的速度
+	speed:0,		//小鸟往下面掉的速度  应该是,
 	a:0.005,		//加速度
 	//显示小鸟的方法：统一在show方法中显示小鸟的最终状态
 	show:function(){
@@ -178,7 +178,7 @@ pipes = {
 		
 		//接下来确定一组柱子的高度
 		let h1 = this.getRandom(minHeight,maxHeight),
-			h1 = 488 - gap - h1;
+			h2 = 488 - gap - h1;		//h2
 		//接下来根据这两个高度来创建柱子
 		//上面的柱子
 		let div1 = document.createElemet("div");
@@ -235,7 +235,7 @@ pipes.moveTimer = getTimer(30,pipes,function(){		//[错误]首字母不应该大
 	}
 	
 	game.gameOver();		//每次移动柱子后，都需要判断游戏是否结束
-})；
+});
 
 document.documentElement.onkeydown = function(e){
 	if(e.key === ' '){
