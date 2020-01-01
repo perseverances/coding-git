@@ -10,7 +10,7 @@
 #game .sky{
 	width:1600px;
 	height:600px;
-	background:url('img/sky.png');	/*  ./img与img没有区别   */
+	background:url('./img/sky.png');	/*  ./img与img没有区别   */
 	position:absolute;				/* 绝对定位 */
 	left:0;							/*距离浏览器左为0，上为0*/
 	top:0;

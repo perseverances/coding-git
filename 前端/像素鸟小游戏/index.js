@@ -4,8 +4,8 @@ let skyBg,landBg,bird,game,pipes;
 //start：创建一个计时器；   stop：停止计时器；   duration：计时器每隔多少毫秒执行；
 //callback：每隔duration毫秒执行callback函数；   thisObj：为了得到正确德this指向
 
-let getTimer = function (duration,thisobj,callback){	//let用来声明局部变量，只在let命令所在的代码内有效，而且有暂时性死区的约束
-	var timer = null;
+let getTimer = function (duration,thisObj,callback){	//let用来声明局部变量，只在let命令所在的代码内有效，而且有暂时性死区的约束
+	var timer = null;									//[错误]O要大写
 	return{
 		start:function(){
 			if(!timer){
@@ -30,7 +30,7 @@ game = {
 	dom:document.querySelector('#game'),		//获取文档中"game"元素
 	start:function(){
 		skyBg.timer.start();
-		landing.timer.start();
+		landbg.timer.start();			//[错误]landBg写成了landing
 		bird.wingTimer.start();
 		bird.dropTimer.start();
 		pipes.produceTimer.start();
@@ -67,7 +67,7 @@ game = {
 			//判断是否碰撞
 			if(Math.abs(bx - px) < (p.width + bird.width) /2 &&		//[错误]bx写成了bs
 				Math.abs(by-py) < (p.heiht + bird.height) /2){
-					console.log("游戏结束");
+					console.log('游戏结束');		//之前是''
 					this.isGameOver = true;
 					this.stop();
 				}
@@ -78,7 +78,7 @@ game = {
 //天空对象
 skyBg = {			//[错误]skyBg写成了slyBg
 	left:0,			//[错误] ,写成了;
-	dom:document.querySelector('#game .sky');
+	dom:document.querySelector('#game .sky'),		//[错误]写成了;
 	//该方法用于重新更新天空的left值
 	show:function(){
 		this.dom.style.left = this.left + 'px'
@@ -121,7 +121,7 @@ bird = {
 	//显示小鸟的方法：统一在show方法中显示小鸟的最终状态
 	show:function(){
 		//根据图片的索引，来设置当前小鸟背景图的位置
-		if(this.wingTndex ===0){
+		if(this.wingIndex ===0){		//I写成了T
 			this.dom.style.backgroundPosition = '-8px -10px';
 		}else if(this.wingIndex === 1){
 			this.dom.style.backgroundPosition = '-60px -10px';
@@ -130,7 +130,7 @@ bird = {
 		}
 		//设置小鸟的top值
 		this.dom.style.top = this.top + 'px';
-	}			//[错误]不应该写,
+	},			//[错误]应该写,
 	//设置小鸟的top值
 	setTop(newTop){
 		if(newTop < 0){
@@ -167,7 +167,7 @@ bird.dropTimer = getTimer(16,bird,function(){
 pipes = {
 	width:52,
 	getRandom:function(min,max){
-		return Math,floor(Math.random() * (max - min) + min);
+		return Math.floor(Math.random() * (max - min) + min);	//[错误]Math.
 	},
 	all:[],		//用于存放所有的柱子
 	//创建柱子的方法
@@ -182,7 +182,7 @@ pipes = {
 		//接下来根据这两个高度来创建柱子
 		//上面的柱子
 		let div1 = document.createElemet("div");
-		div1.className = "pipeip";		//[错误]name写成了nmae
+		div1.className = "pipeUp";		//[错误]name写成了nmae  pipeUp
 		div1.style.height = h1 + "px";
 		div1.style.left = "800px";
 		game.dom.appendChild(div1);		//[错误]dom写成了som
@@ -230,7 +230,7 @@ pipes.moveTimer = getTimer(30,pipes,function(){		//[错误]首字母不应该大
 		
 		//判断柱子是否过了小鸟，若过了则说明小鸟过了一根柱子
 		if(p.left<= (bird.left-pipes.width)){		//[错误] <= 写成了<
-			comsole("+1");
+			console.log("+1");		//[错误]缺少/log
 		}
 	}
 	
